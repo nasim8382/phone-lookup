@@ -15,6 +15,7 @@ const searchButton = () => {
         error.innerText = '';
         input.value = '';
         phones.innerHTML = '';
+        phoneDetails.innerHTML = '';
         spinner.style.display = 'block';
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
@@ -60,6 +61,7 @@ const displayPhones = phones => {
     spinner.style.display = 'none';
 }
 
+// get phone details by id
 const getPhoneId = id => {
     fetch(`https://openapi.programming-hero.com/api/phone/${id}`)
         .then(res => res.json())
