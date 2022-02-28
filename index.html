@@ -15,24 +15,28 @@
     
     <!-- header section -->
     <header >
-        <h1 class="text-center text-success my-3">Phone LookUp Site</h1>
+        <h1 class="text-center my-4"><span class="text-warning">Phone</span> LookUp</h1>
     </header>
 
     <!-- main section -->
     <main class="container">
         <div class="container">
-            <div class="d-flex w-50 mx-auto">
-                <input id="input-value" class="form-control me-2" type="search" placeholder="Search Your Phone" aria-label="Search">
-                <button onclick="searchButton()" class="btn btn-outline-success btn-success" type="submit"><span class="text-white text-uppercase fw-bolder">Search</span></button>
+            <div class="d-flex w-75 mx-auto my-5">
+                <input id="input-value" class="form-control" type="search" placeholder="Search Your Phone" aria-label="Search">
+                <button id="search-btn" onclick="searchButton()" class="btn btn-outline-success" type="submit"><span class="text-white text-uppercase fw-bolder">Search</span></button>
               </div>
     
-              <h3 id="error-message" class="text-center text-danger mt-4"></h3>
+              <h3 id="error-message" class="text-center text-danger"></h3>
+
+            <div id="details">
+            </div>
     
-              <div id="phones" class="row g-4 mb-5 mx-auto">
-              </div>
+            <div id="phones" class="row g-5 mb-5">
+            </div>
         </div>
     </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <!-- external javascript file link -->
     <script src="js/index.js"></script>
 </body>
