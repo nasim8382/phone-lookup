@@ -18,6 +18,9 @@ h5{
     color: darkgoldenrod;
     margin-bottom: 20px;
 }
+#spinner{
+    display: none;
+}
 .card{
     border: none;
     border-radius: 10px;

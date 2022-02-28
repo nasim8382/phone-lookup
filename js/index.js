@@ -1,6 +1,8 @@
 const showPhones = document.getElementById('phones');
 const phoneDetails = document.getElementById('details');
+const spinner = document.getElementById('spinner');
 
+// get search value
 const searchButton = () => {
     const input = document.getElementById('input-value');
     const error = document.getElementById('error-message');
@@ -13,6 +15,7 @@ const searchButton = () => {
         error.innerText = '';
         input.value = '';
         phones.innerHTML = '';
+        spinner.style.display = 'block';
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
             .then(res => res.json())
             .then(data => displayPhones(data.data));
@@ -36,6 +39,7 @@ const searchButton = () => {
     }
 }
 
+// display all phones
 const displayPhones = phones => {
     const first20Phones = phones.slice(0,20);
     first20Phones.forEach(phone => {
@@ -53,6 +57,7 @@ const displayPhones = phones => {
         `;
         showPhones.appendChild(div);
     });
+    spinner.style.display = 'none';
 }
 
 const getPhoneId = id => {
@@ -61,6 +66,7 @@ const getPhoneId = id => {
         .then(data => displayDetails(data.data));
 }
 
+// show all specifications of phones
 const displayDetails = details => {
     const div = document.createElement('div');
     phoneDetails.innerHTML = '';
