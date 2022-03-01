@@ -105,10 +105,11 @@ const displayDetails = details => {
                 <h4 class="card-title"><span id="text-color">Name : </span> ${details.name}</h4>
                 <h5 class="card-title"><span id="text-color">Brand : </span>${details.brand}</h5>
                 <h6 class="card-title"><span id="text-color">Release Date : </span> ${details.releaseDate ? details.releaseDate: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">Chipset : </span>${details.mainFeatures.chipSet}</h6>
+                <h6 class="card-title"><span id="text-color">Chipset : </span>${details.mainFeatures.chipSet ? details.mainFeatures.chipSet: 'Not Found'}</h6>
                 <h6 class="card-title"><span id="text-color">Display Size : </span>${details.mainFeatures.displaySize}</h6>
-                <h6 class="card-title"><span id="text-color">Memory : </span>${details.mainFeatures.memory}</h6>
+                <h6 class="card-title"><span id="text-color">Memory : </span>${details.mainFeatures.memory ? details.mainFeatures.memory: 'Not Found'}</h6>
                 <h6 class="card-title"><span id="text-color">Sensors : </span>${sensorList}</h6>
+                <h6 class="card-title"><span id="text-color">Storage : </span>${details.mainFeatures.storage}</h6>
                 <h6 class="card-title"><span id="text-color">Blutooth :</span>${details.others.Bluetooth}</h6>
                 <h6 class="card-title"><span id="text-color">GPS :</span>${details.others.GPS}</h6>
                 <h6 class="card-title"><span id="text-color">NFC :</span>${details.others.NFC}</h6>
