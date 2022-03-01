@@ -23,19 +23,19 @@ const searchButton = () => {
             .then(data => displayPhones(data.data));
     }
     else if(inputValue == ''){
-        error.innerText = 'Please input a phone name !!!';
+        error.innerText = 'Please give a valid phone name !!!';
         input.value = '';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
     }
     else if (isNaN(inputValue) == false && parseInt(inputValue) !== 'string'){
-        error.innerText = 'Please avoid a number input !!!';
+        error.innerText = 'Please avoid a number input & give valid brand name  !!!';
         input.value = '';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
     }
     else{
-        error.innerText = 'No Phone found, please give a valid input !!!';
+        error.innerText = 'No Phone found, please give valid brand name !!!';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
     }
@@ -45,11 +45,14 @@ const searchButton = () => {
 const displayPhones = phones => {
     const first20Phones = phones.slice(0,20);
     const restPhones = phones.slice(21);
-    console.log(restPhones);
     first20Phones.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col-md-6', 'col-lg-4', 'text-center');
-        div.innerHTML = `
+        if(phone.phone_name.includes('Watch')){
+            div.innerHTML = '';
+        }
+        else{
+            div.innerHTML = `
             <div class="card mx-auto shadow" style="width: 18rem;">
                 <img src="${phone.image}" id="card-img" class="card-img-top w-75 mx-auto pt-3" alt="image">
                 <div class="card-body">
@@ -60,6 +63,7 @@ const displayPhones = phones => {
             </div>
         `;
         showPhones.appendChild(div);
+        }
     });
     spinner.style.display = 'none';
     showAllPhone .style.display = 'block';
@@ -67,7 +71,11 @@ const displayPhones = phones => {
         restPhones.forEach(phone => {
             const div = document.createElement('div');
             div.classList.add('col-md-6', 'col-lg-4', 'text-center');
-            div.innerHTML = `
+            if(phone.phone_name.includes('Watch')){
+                div.innerHTML = '';
+            }
+            else{
+                div.innerHTML = `
                 <div class="card mx-auto shadow" style="width: 18rem;">
                     <img src="${phone.image}" id="card-img" class="card-img-top w-75 mx-auto pt-3" alt="image">
                     <div class="card-body">
@@ -78,6 +86,7 @@ const displayPhones = phones => {
                 </div>
             `;
             showPhones.appendChild(div);
+            }
         });
         showAllPhone .style.display = 'none';
     })
@@ -110,12 +119,12 @@ const displayDetails = details => {
                 <h6 class="card-title"><span id="text-color">Memory : </span>${details.mainFeatures.memory ? details.mainFeatures.memory: 'Not Found'}</h6>
                 <h6 class="card-title"><span id="text-color">Sensors : </span>${sensorList}</h6>
                 <h6 class="card-title"><span id="text-color">Storage : </span>${details.mainFeatures.storage}</h6>
-                <h6 class="card-title"><span id="text-color">Blutooth :</span>${details.others.Bluetooth}</h6>
-                <h6 class="card-title"><span id="text-color">GPS :</span>${details.others.GPS}</h6>
-                <h6 class="card-title"><span id="text-color">NFC :</span>${details.others.NFC}</h6>
-                <h6 class="card-title"><span id="text-color">Radio :</span>${details.others.Radio}</h6>
-                <h6 class="card-title"><span id="text-color">USB :</span>${details.others.USB}</h6>
-                <h6 class="card-title"><span id="text-color">WLAN :</span>${details.others.WLAN}</h6>
+                <h6 class="card-title"><span id="text-color">Blutooth :</span>${details?.others?.Bluetooth ? details?.others?.Bluetooth: 'Not Found'}</h6>
+                <h6 class="card-title"><span id="text-color">GPS :</span>${details?.others?.GPS ? details?.others?.GPS: 'Not Found'}</h6>
+                <h6 class="card-title"><span id="text-color">NFC :</span>${details?.others?.NFC ? details?.others?.NFC: 'Not Found'}</h6>
+                <h6 class="card-title"><span id="text-color">Radio :</span>${details?.others?.Radio ? details?.others?.Radio: 'Not Found'}</h6>
+                <h6 class="card-title"><span id="text-color">USB :</span>${details?.others?.USB ? details?.others?.USB: 'Not Found'}</h6>
+                <h6 class="card-title"><span id="text-color">WLAN :</span>${details?.others?.WLAN ? details?.others?.WLAN: 'Not Found'}</h6>
             </div>
         </div> 
     `;
