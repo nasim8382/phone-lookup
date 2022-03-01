@@ -9,10 +9,10 @@ h1{
     font-size: 50px;
     color: purple;
 }
-#search-btn, .btn-bg-color {
+#search-btn, #show-btn, .btn-bg-color {
     background-color: purple;
 }
-#search-btn:hover, .btn-bg-color:hover {
+#search-btn:hover, #show-btn:hover, .btn-bg-color:hover {
     background-color: darkslateblue;
 }
 h4{
@@ -22,7 +22,7 @@ h5{
     color: darkgoldenrod;
     margin-bottom: 20px;
 }
-#spinner{
+#spinner, #show-btn{
     display: none;
 }
 .card{

@@ -1,6 +1,7 @@
 const showPhones = document.getElementById('phones');
 const phoneDetails = document.getElementById('details');
 const spinner = document.getElementById('spinner');
+const showAllPhone = document.getElementById('show-btn');
 
 // get search value
 const searchButton = () => {
@@ -34,7 +35,7 @@ const searchButton = () => {
         phoneDetails.innerHTML = '';
     }
     else{
-        error.innerText = 'Phone not found, please give a valid input !!!';
+        error.innerText = 'No Phone found, please give a valid input !!!';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
     }
@@ -43,6 +44,8 @@ const searchButton = () => {
 // display all phones
 const displayPhones = phones => {
     const first20Phones = phones.slice(0,20);
+    const restPhones = phones.slice(21);
+    console.log(restPhones);
     first20Phones.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col-md-6', 'col-lg-4', 'text-center');
@@ -59,6 +62,25 @@ const displayPhones = phones => {
         showPhones.appendChild(div);
     });
     spinner.style.display = 'none';
+    showAllPhone .style.display = 'block';
+    document.getElementById('show-btn').addEventListener('click', function() {
+        restPhones.forEach(phone => {
+            const div = document.createElement('div');
+            div.classList.add('col-md-6', 'col-lg-4', 'text-center');
+            div.innerHTML = `
+                <div class="card mx-auto shadow" style="width: 18rem;">
+                    <img src="${phone.image}" id="card-img" class="card-img-top w-75 mx-auto pt-3" alt="image">
+                    <div class="card-body">
+                        <h4 class="card-title">${phone.phone_name}</h4>
+                        <h5 class="card-text">Brand : ${phone.brand}</h5>
+                        <a href="#" class="btn fw-bolder btn-bg-color" onclick="getPhoneId('${phone.slug}')"><span class="text-white">Full Specifications</span></a>
+                    </div>
+                </div>
+            `;
+            showPhones.appendChild(div);
+        });
+        showAllPhone .style.display = 'none';
+    })
 }
 
 // get phone details by id
