@@ -15,7 +15,7 @@ const searchButton = () => {
     if (inputValue.toLowerCase() === samsung || inputValue.toLowerCase() === iphone || inputValue.toLowerCase() === oppo || inputValue.toLowerCase() === huawei) {
         error.innerText = '';
         input.value = '';
-        phones.innerHTML = '';
+        showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
         spinner.style.display = 'block';
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
@@ -27,24 +27,28 @@ const searchButton = () => {
         input.value = '';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
+        showAllPhone .style.display = 'none';
     }
     else if (isNaN(inputValue) == false && parseInt(inputValue) !== 'string'){
-        error.innerText = 'Please avoid a number input & give valid brand name  !!!';
+        error.innerText = 'Please avoid number & give valid brand name  !!!';
         input.value = '';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
+        showAllPhone .style.display = 'none';
     }
     else{
         error.innerText = 'No Phone found, please give valid brand name !!!';
+        input.value = '';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
+        showAllPhone .style.display = 'none';
     }
 }
 
 // display all phones
 const displayPhones = phones => {
     const first20Phones = phones.slice(0,20);
-    const restPhones = phones.slice(21);
+    let restPhones = phones.slice(21);
     first20Phones.forEach(phone => {
         const div = document.createElement('div');
         div.classList.add('col-md-6', 'col-lg-4', 'text-center');
@@ -67,6 +71,9 @@ const displayPhones = phones => {
     });
     spinner.style.display = 'none';
     showAllPhone .style.display = 'block';
+    if(first20Phones.length < 20) {
+        showAllPhone .style.display = 'none';
+    }
     document.getElementById('show-btn').addEventListener('click', function() {
         restPhones.forEach(phone => {
             const div = document.createElement('div');
@@ -89,6 +96,7 @@ const displayPhones = phones => {
             }
         });
         showAllPhone .style.display = 'none';
+        restPhones = '';
     })
 }
 
