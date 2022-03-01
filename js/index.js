@@ -23,7 +23,7 @@ const searchButton = () => {
             .then(data => displayPhones(data.data));
     }
     else if(inputValue == ''){
-        error.innerText = 'Please give a valid phone name !!!';
+        error.innerText = 'Please give a valid phone brand name !!!';
         input.value = '';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
@@ -103,28 +103,24 @@ const getPhoneId = id => {
 const displayDetails = details => {
     const div = document.createElement('div');
     phoneDetails.innerHTML = '';
-    const sensorList = [];
-    const sensors = details.mainFeatures.sensors.forEach(sensor => {
-        sensorList.push(sensor);
-    });
     div.innerHTML = `
         <div class="card mx-auto mb-5 shadow-lg" style="width: 18rem;">
             <img src="${details.image}" class="card-img-top img-fluid" alt="image">
             <div class="card-body">
-                <h4 class="card-title"><span id="text-color">Name : </span> ${details.name}</h4>
-                <h5 class="card-title"><span id="text-color">Brand : </span>${details.brand}</h5>
-                <h6 class="card-title"><span id="text-color">Release Date : </span> ${details.releaseDate ? details.releaseDate: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">Chipset : </span>${details.mainFeatures.chipSet ? details.mainFeatures.chipSet: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">Display Size : </span>${details.mainFeatures.displaySize}</h6>
-                <h6 class="card-title"><span id="text-color">Memory : </span>${details.mainFeatures.memory ? details.mainFeatures.memory: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">Sensors : </span>${sensorList}</h6>
-                <h6 class="card-title"><span id="text-color">Storage : </span>${details.mainFeatures.storage}</h6>
-                <h6 class="card-title"><span id="text-color">Blutooth :</span>${details?.others?.Bluetooth ? details?.others?.Bluetooth: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">GPS :</span>${details?.others?.GPS ? details?.others?.GPS: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">NFC :</span>${details?.others?.NFC ? details?.others?.NFC: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">Radio :</span>${details?.others?.Radio ? details?.others?.Radio: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">USB :</span>${details?.others?.USB ? details?.others?.USB: 'Not Found'}</h6>
-                <h6 class="card-title"><span id="text-color">WLAN :</span>${details?.others?.WLAN ? details?.others?.WLAN: 'Not Found'}</h6>
+                <h3 class="card-title">${details.name}</h3>
+                <h4 class="card-title">Brand: ${details.brand}</h4>
+                <p class="card-title"><span class="text-color">Release Date: </span>${details.releaseDate ? details.releaseDate: 'Not Found'}</p>
+                <h6 class="card-title"><span class="text-color">Chipset: </span>${details.mainFeatures.chipSet ? details.mainFeatures.chipSet: 'Not Found'}</h6>
+                <h6 class="card-title"><span class="text-color">Display Size: </span>${details.mainFeatures.displaySize}</h6>
+                <h6 class="card-title"><span class="text-color">Memory: </span>${details.mainFeatures.memory ? details.mainFeatures.memory: 'Not Found'}</h6>
+                <h6 class="card-title"><span class="text-color">Sensors: </span>${details.mainFeatures.sensors.join()}</h6>
+                <h6 class="card-title"><span class="text-color">Storage: </span>${details.mainFeatures.storage}</h6>
+                <h6 class="card-title"><span class="text-color">Blutooth:</span>${details?.others?.Bluetooth ? details?.others?.Bluetooth: 'Not Found'}</h6>
+                <h6 class="card-title"><span class="text-color">GPS:</span>${details?.others?.GPS ? details?.others?.GPS: 'Not Found'}</h6>
+                <h6 class="card-title"><span class="text-color">NFC:</span>${details?.others?.NFC ? details?.others?.NFC: 'Not Found'}</h6>
+                <h6 class="card-title"><span class="text-color">Radio:</span>${details?.others?.Radio ? details?.others?.Radio: 'Not Found'}</h6>
+                <h6 class="card-title"><span class="text-color">USB:</span>${details?.others?.USB ? details?.others?.USB: 'Not Found'}</h6>
+                <h6 class="card-title"><span class="text-color">WLAN:</span>${details?.others?.WLAN ? details?.others?.WLAN: 'Not Found'}</h6>
             </div>
         </div> 
     `;
