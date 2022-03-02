@@ -8,40 +8,30 @@ const searchButton = () => {
     const input = document.getElementById('input-value');
     const error = document.getElementById('error-message');
     const inputValue = input.value;
-    const samsung = 'samsung';
-    const iphone = 'iphone';
-    const oppo = 'oppo';
-    const huawei = 'huawei';
-    if (inputValue.toLowerCase() === samsung || inputValue.toLowerCase() === iphone || inputValue.toLowerCase() === oppo || inputValue.toLowerCase() === huawei) {
-        error.innerText = '';
-        input.value = '';
-        showPhones.innerHTML = '';
-        phoneDetails.innerHTML = '';
-        spinner.style.display = 'block';
-        fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
-            .then(res => res.json())
-            .then(data => displayPhones(data.data));
-    }
-    else if(inputValue == ''){
-        error.innerText = 'Please give a valid phone brand name !!!';
-        input.value = '';
-        showPhones.innerHTML = '';
-        phoneDetails.innerHTML = '';
-        showAllPhone .style.display = 'none';
-    }
-    else if (isNaN(inputValue) == false && parseInt(inputValue) !== 'string'){
-        error.innerText = 'Please avoid number & give valid brand name  !!!';
+    if(inputValue == ''){
+        error.innerText = 'Please write something in search field!!!';
         input.value = '';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
         showAllPhone .style.display = 'none';
     }
     else{
-        error.innerText = 'No Phone found, please give valid brand name !!!';
         input.value = '';
+        fetch(`https://openapi.programming-hero.com/api/phones?search=${inputValue}`)
+            .then(res => res.json())
+            .then(data => {
+                if(data.data.length === 0){
+                    error.innerText = 'No Phone found, please give valid keyword!!!';
+                    spinner.style.display = 'none';
+                }
+                else{
+                    displayPhones(data.data);
+                    error.innerText = '';
+                }
+            });
+        spinner.style.display = 'block';
         showPhones.innerHTML = '';
         phoneDetails.innerHTML = '';
-        showAllPhone .style.display = 'none';
     }
 }
 
@@ -112,7 +102,7 @@ const displayDetails = details => {
     const div = document.createElement('div');
     phoneDetails.innerHTML = '';
     div.innerHTML = `
-        <div class="card mx-auto mb-5 shadow-lg" style="width: 18rem;">
+        <div class="card mx-auto p-3 mb-5 shadow-lg" style="width: 20rem;">
             <img src="${details.image}" class="card-img-top img-fluid" alt="image">
             <div class="card-body">
                 <h3 class="card-title">${details.name}</h3>
